@@ -3,7 +3,7 @@ import { AccountEntity } from "../../domain/entities/accounts/account.entity"
 import { ArrayDatabase } from "../../infrastructure/persistence/array.database";
 import { IAccountsRepository } from "../../domain/repositories/accounts.repository.interface";
 
-class AccountsRepository implements IAccountsRepository {
+export class AccountsRepository implements IAccountsRepository {
     private _type: string = 'account';
 
     constructor(private _database: IDatabase){
@@ -14,7 +14,7 @@ class AccountsRepository implements IAccountsRepository {
         return this._database.read(this._type, resourceId);
     }
 
-    async create(resource: AccountEntity): Promise<AccountEntity> {
+    async create(resource: AccountEntity): Promise<AccountEntity>  {
         resource.indexId = this._database.create(this._type, resource);
         return resource;
     }
